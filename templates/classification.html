@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <main class="flex flex-col  h-screen w-screen">
+    <main class="flex flex-col h-screen w-screen justify-center items-center">
         {% if all_images_done == False %}
         <div class="bg-grey-100 grow flex justify-center items-center h-5/6">
             <img src="{{ current_image }}" class="h-5/6 w-fit" />
@@ -14,17 +14,19 @@
                 <span class="p-4 m-2">{{i}}: {{ categories[i] }}</span>
             {%endfor%}
         </div>
+        {% else %}
+        <h1 class="text-4xl">All Images Are Classified! Yay!</h1>
         {% endif %}
     </main>
 
     {% if all_images_done == false %}
     <script>
         let datasetName = "{{ dataset_name }}";
-        let imageName = "{{ image_name }}";
+        let imageName = "{{ encoded_image_name }}";
         let categories = [
-        {% for category in  categories %}
-            "{{ category }}",
-        {% endfor %}
+            {% for category in categories %}
+                "{{ category }}",
+            {% endfor %}
         ];
 
         document.addEventListener('keydown', (event)=> {
@@ -35,7 +37,7 @@
 
             let index = parseInt(event.key);
             let category = categories[index];
-            let url = "/" + datasetName + "/" + category + "/" + imageName;
+            let url = "/classify/" + datasetName + "/" + category + "/" + imageName;
             console.log(url);
 
             fetch(url).then((response) => {

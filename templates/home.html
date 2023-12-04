@@ -7,7 +7,7 @@
     <h1 class="text-4xl mb-4 font-semibold">Datasets</h1>
     <div class="flex flex-col">
         {%for i in range(0, dataset_count)%}
-            <a href="/{{ dataset_names[i] }}">
+            <a href="/{{ encoded_dataset_names[i] }}">
                 <button class="p-4 m-4 text-lg w-96 bg-slate-200 hover:shadow-md">
                     {{ dataset_names[i] }}
                 </button>
