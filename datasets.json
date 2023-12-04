@@ -1,0 +1,25 @@
+{
+    "feedback": [
+        "simple",
+        "with_simple_feedback",
+        "with_big_feedback",
+        "no_feedback_visible",
+        "no_query_entered",
+        "wrong_page"
+    ],
+    "side_panel": [
+        "panel_open",
+        "panel_close",
+        "wrong_page"
+    ],
+    "chatgpt_v": [
+        "3.5",
+        "4",
+        "wrong_page"
+    ],
+    "daily_limit": [
+        "limit_not_hit",
+        "limit_hit",
+        "wrong_page"
+    ]
+}

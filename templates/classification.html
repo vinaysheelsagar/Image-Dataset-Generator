@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Classification{% endblock %}
+
+{% block body %}
+
+    <main class="flex flex-col  h-screen w-screen">
+        {% if all_images_done == False %}
+        <div class="bg-grey-100 grow flex justify-center items-center h-5/6">
+            <img src="{{ current_image }}" class="h-5/6 w-fit" />
+        </div>
+        <div class="h-1/6 flex justify-center items-center">
+            {% for i in range(0, categories_count) %}
+                <span class="p-4 m-2">{{i}}: {{ categories[i] }}</span>
+            {%endfor%}
+        </div>
+        {% endif %}
+    </main>
+
+    {% if all_images_done == false %}
+    <script>
+        let datasetName = "{{ dataset_name }}";
+        let imageName = "{{ image_name }}";
+        let categories = [
+        {% for category in  categories %}
+            "{{ category }}",
+        {% endfor %}
+        ];
+
+        document.addEventListener('keydown', (event)=> {
+            if (isFinite(event.key) !== true) {
+                console.log(event.key.toString() + " not a valid key");
+                return;
+            }
+
+            let index = parseInt(event.key);
+            let category = categories[index];
+            let url = "/" + datasetName + "/" + category + "/" + imageName;
+            console.log(url);
+
+            fetch(url).then((response) => {
+              if (response.status === 200) {
+                window.location.href = "/" + datasetName;
+              }
+            });
+
+        });
+    </script>
+    {% endif %}
+{% endblock %}
